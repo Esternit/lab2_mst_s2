@@ -41,7 +41,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_chooseFile_clicked()
 {
-    QString file_name = QFileDialog::getOpenFileName(this, "Open File", "C://Dima/C++/MST/lab1_mst_s2");
+    QString file_name = QFileDialog::getOpenFileName(this, "Open File", "C://Dima/C++/MST/lab1_mst_s2", "(*.ini)");
     QListWidget* itemsList = ui->listWidget;
     QListWidgetItem *newItem = new QListWidgetItem;
     newItem->setText(file_name);
@@ -120,13 +120,13 @@ void MainWindow::add_button_clicked(bool clicked){
     QString key_select = ui->keyEdit->text();
     QString value_select = ui->valueEdit->text();
     //std::cout << key_select.toStdString() << std::endl;
-    if(type_select == "int"){
+    if(type_select == "int" && value_select.toInt() && value_select.length() > 0 && key_select.length()>0){
         workingFiles[sel[0]->text()].writeInt(section_select.toStdString(),key_select.toStdString(),value_select.toInt());
     }
-    else if(type_select == "double"){
+    else if(type_select == "double" && value_select.toDouble() && value_select.length() > 0 && key_select.length()>0){
         workingFiles[sel[0]->text()].writeDouble(section_select.toStdString(),key_select.toStdString(),value_select.toDouble());
     }
-    else if(type_select == "bool"){
+    else if(type_select == "bool" && value_select.length() > 0 && key_select.length()>0){
         for (const auto &trueValue : trueValues)
         {
             if (value_select.toStdString() == trueValue)
@@ -136,7 +136,7 @@ void MainWindow::add_button_clicked(bool clicked){
         }
         workingFiles[sel[0]->text()].writeBool(section_select.toStdString(),key_select.toStdString(),false);
     }
-    else if(type_select == "string"){
+    else if(type_select == "string" && value_select.length() > 0 && key_select.length()>0){
         workingFiles[sel[0]->text()].writeString(section_select.toStdString(),key_select.toStdString(),value_select.toStdString());
     }
 
